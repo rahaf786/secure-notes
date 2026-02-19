@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ mode }} Note</h2>
+
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+  <label>Title</label><br>
+  <input name="title" maxlength="120" required
+         value="{{ note.title if note else '' }}"><br><br>
+
+  <label>Content</label><br>
+  <textarea name="content" rows="8" cols="60" required>
+{{ note.content if note else '' }}</textarea><br><br>
+
+  <button type="submit">{{ mode }}</button>
+</form>
+
+<p><a href="/dashboard">Back to dashboard</a></p>
+{% endblock %}
+
+

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+
+<p>
+  <a href="/notes/new">+ New note</a> |
+  <a href="/logout">Logout</a>
+</p>
+
+<h3>Your notes</h3>
+{% if notes %}
+  <ul>
+    {% for n in notes %}
+      <li>
+        <strong>{{ n.title }}</strong>
+        <a href="/notes/{{ n.id }}/edit">Edit</a>
+
+        <form method="post"
+              action="/notes/{{ n.id }}/delete"
+              style="display:inline;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit"
+                  onclick="return confirm('Delete this note?')">
+            Delete
+          </button>
+        </form>
+
+        <br>
+        <small>Updated {{ n.updated_at }}</small>
+      </li>
+      <br>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No notes yet.</p>
+{% endif %}
+{% endblock %}
+

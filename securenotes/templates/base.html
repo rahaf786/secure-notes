@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Secure Notes</title>
+</head>
+<body>
+  <h1>Secure Notes</h1>
+  <p><a href="/register">Register</a> | <a href="/login">Login</a> | <a href="/dashboard">Dashboard</a></p>
+  <hr>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+        {% for m in messages %}
+          <li>{{ m }}</li>
+        {% endfor %}
+      </ul>
+      <hr>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</body>
+</html>
